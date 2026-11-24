@@ -608,6 +608,7 @@ tfoot td.sum.c-off{background:#fafbfd;color:var(--ink2)}
     <button id="btnTags" class="btn">タグ</button>
     <span class="sep"></span>
     <button id="btnCsv" class="btn">CSV</button>
+    <button id="btnXlsx" class="btn" title="画面と同じ色のシフト表をExcel（.xlsx）で書き出します">Excel</button>
     <button id="btnJson" class="btn">JSON保存</button>
     <button id="btnImport" class="btn">読込</button>
     <button id="btnPrint" class="btn">印刷</button>
@@ -4102,6 +4103,9 @@ function exportCsv(){
 function exportJson(){
   freeLimitNotice(FREE_LOCK_MSG);
 }
+function exportXlsx(){
+  freeLimitNotice(FREE_XLSX_MSG);
+}
 function importJson(file){
   var reader = new FileReader();
   reader.onload = function(){
@@ -4128,6 +4132,7 @@ function importJson(file){
 
 /* ================= 無料お試し版の案内 ================= */
 var FREE_LOCK_MSG = 'CSV出力・JSON保存・印刷は製品版で利用できます';
+var FREE_XLSX_MSG = 'Excel出力（画面と同じ色のシフト表 .xlsx）は製品版で利用できます';
 function freeLimitNotice(msg){
   var el = $('#freeModalMsg');
   if(el) el.textContent = msg || FREE_LOCK_MSG;
@@ -4261,6 +4266,7 @@ function bind(){
     else if(act === 'preset-glasses4'){ $('#presetSel').value = 'glasses4'; applyPreset('glasses4'); }
   });
   $('#btnCsv').addEventListener('click', exportCsv);
+  $('#btnXlsx').addEventListener('click', exportXlsx);
   $('#btnJson').addEventListener('click', exportJson);
   $('#btnImport').addEventListener('click', function(){ $('#fileImport').click(); });
   $('#fileImport').addEventListener('change', function(e){
